@@ -1,10 +1,12 @@
+import "./Person.css";
+
 export default function Person(props) {
   return (
-    <div>
+    <div className="Person">
       <p onClick={props.click}>
         I am {props.name}. I am {props.age} years Old. {props.children}
       </p>
-      <input type="text" onChange={props.changed}></input>
+      <input type="text" onChange={props.changed} value={props.name}></input>
     </div>
   );
 }

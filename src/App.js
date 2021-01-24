@@ -39,14 +39,14 @@ class App extends React.Component {
   };
 
   nameChangedHandler = (event) => {
-    this.state({
+    this.setState({
       persons: [
         {
           name: "Yash",
           age: 12,
         },
         {
-          name: "Hello",
+          name: event.target.value,
           age: 22,
         },
         { name: "SamJ", age: 33 },
@@ -55,6 +55,14 @@ class App extends React.Component {
   };
 
   render() {
+    const style = {
+      "background-color": "white",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer",
+    };
+
     return (
       <div className="App">
         <h1> I am a React App</h1>
@@ -63,12 +71,10 @@ class App extends React.Component {
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
           click={this.switchNameHandler}
+          changed={this.nameChangedHandler}
         >
           Using State
         </Person>
-        <button onClick={this.switchNameHandler.bind(this, "YashIK Bind")}>
-          My Button
-        </button>
         <Person
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
@@ -77,6 +83,12 @@ class App extends React.Component {
         />
         <Person name="Sam" age="32" />
         <Person />
+        <button
+          onClick={this.switchNameHandler.bind(this, "YashIK Bind")}
+          style={style}
+        >
+          My Button
+        </button>
       </div>
     );
   }
