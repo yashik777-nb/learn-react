@@ -3,6 +3,7 @@
 import React from "react";
 import "./App.css";
 import Person from "./Person/Person";
+import Radium from "radium";
 
 class App extends React.Component {
   state = {
@@ -74,12 +75,18 @@ class App extends React.Component {
 
   render() {
     const style = {
-      backgroundColor: "white",
+      backgroundColor: "green",
+      color: "white",
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
       margin: "8px",
       cursor: "pointer",
+
+      ":hover": {
+        backgroundColor: "lightgreen",
+        color: "black",
+      },
     };
 
     let persons = null;
@@ -116,12 +123,22 @@ class App extends React.Component {
           <Person /> */}
         </div>
       );
+
+      style.backgroundColor = "red";
+      style[":hover"] = {
+        backgroundColor: "lightred",
+        color: "black",
+      };
     }
+
+    let paragraphClass = [];
+    if (this.state.persons.length <= 2) paragraphClass.push("red");
+    if (this.state.persons.length <= 1) paragraphClass.push("bold");
 
     return (
       <div className="App">
         <h1> I am a React App</h1>
-        <p>This is Working</p>
+        <p className={paragraphClass.join(" ")}>This is Working</p>
         {/* <button
           onClick={this.switchNameHandler.bind(this, "YashIK Bind")}
           style={style}
@@ -137,4 +154,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Radium(App);

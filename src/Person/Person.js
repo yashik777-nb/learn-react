@@ -1,6 +1,8 @@
 import "./Person.css";
+import React from "react";
+import Radium from "radium";
 
-export default function Person(props) {
+function Person(props) {
   return (
     <div className="Person">
       <p onClick={props.click}>
@@ -15,3 +17,5 @@ Person.defaultProps = {
   name: "Default",
   age: 0,
 };
+
+export default Radium(Person);
