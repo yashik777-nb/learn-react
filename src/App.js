@@ -8,50 +8,61 @@ class App extends React.Component {
   state = {
     persons: [
       {
+        id: 1,
         name: "Yash",
         age: 28,
       },
       {
+        id: 2,
         name: "Sai",
         age: 21,
       },
       {
+        id: 3,
         name: "Sam",
         age: 32,
       },
     ],
+    showPersons: false,
   };
 
-  switchNameHandler = (newName) => {
-    this.setState({
-      persons: [
-        {
-          name: newName,
-          age: 12,
-        },
-        {
-          name: "SaiK",
-          age: 22,
-        },
-        { name: "SamJ", age: 33 },
-      ],
-    });
+  // switchNameHandler = (newName) => {
+  //   this.setState({
+  //     persons: [
+  //       {
+  //         name: newName,
+  //         age: 12,
+  //       },
+  //       {
+  //         name: "SaiK",
+  //         age: 22,
+  //       },
+  //       { name: "SamJ", age: 33 },
+  //     ],
+  //   });
+  // };
+
+  deletePersonHandler = (index) => {
+    // const persons = this.state.persons;
+    // const persons = this.state.persons.slice();
+    // Always copy array and create and new array to avoid immuting. twp options splice and spread opearator
+    const persons = [...this.state.persons];
+    persons.splice(index, 1);
+    this.setState({ persons: persons });
   };
 
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex((p) => p.id === id);
+
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+    const person = { ...this.state.persons[personIndex] };
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
     this.setState({
-      persons: [
-        {
-          name: "Yash",
-          age: 12,
-        },
-        {
-          name: event.target.value,
-          age: 22,
-        },
-        { name: "SamJ", age: 33 },
-      ],
-      showPersons: false,
+      persons: persons,
     });
   };
 
@@ -76,7 +87,18 @@ class App extends React.Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person
+          {this.state.persons.map((person, index) => {
+            return (
+              <Person
+                name={person.name}
+                age={person.age}
+                key={person.id}
+                click={() => this.deletePersonHandler(index)}
+                changed={(event) => this.nameChangedHandler(event, person.id)}
+              />
+            );
+          })}
+          {/* <Person
             name={this.state.persons[0].name}
             age={this.state.persons[0].age}
             click={this.switchNameHandler}
@@ -91,7 +113,7 @@ class App extends React.Component {
             changed={this.nameChangedHandler}
           />
           <Person name="Sam" age="32" />
-          <Person />
+          <Person /> */}
         </div>
       );
     }
@@ -100,12 +122,12 @@ class App extends React.Component {
       <div className="App">
         <h1> I am a React App</h1>
         <p>This is Working</p>
-        <button
+        {/* <button
           onClick={this.switchNameHandler.bind(this, "YashIK Bind")}
           style={style}
         >
           Switch Names handler Button
-        </button>
+        </button> */}
         <button onClick={this.toggleNamesHandler} style={style}>
           Toggle Names Handler Button
         </button>
