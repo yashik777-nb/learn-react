@@ -105,8 +105,11 @@ class App extends React.Component {
     // };
 
     let persons = null;
+    let btnClass = [];
 
     if (this.state.showPersons) {
+      btnClass.push(Classes.Red);
+
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
@@ -147,12 +150,12 @@ class App extends React.Component {
     }
 
     let paragraphClass = [];
-    if (this.state.persons.length <= 2) paragraphClass.push("red");
-    if (this.state.persons.length <= 1) paragraphClass.push("bold");
+    if (this.state.persons.length <= 2) paragraphClass.push(Classes.red);
+    if (this.state.persons.length <= 1) paragraphClass.push(Classes.bold);
 
     return (
       // <StyleRoot>
-      <div className="App">
+      <div className={Classes.App}>
         <h1> I am a React App</h1>
         <p className={paragraphClass.join(" ")}>This is Working</p>
         {/* <button
@@ -167,7 +170,10 @@ class App extends React.Component {
         >
           Toggle Names Handler Styled Button
         </StyledButton> */}
-        <button className={Classes.Button} onClick={this.toggleNamesHandler}>
+        <button
+          className={btnClass.join(" ")}
+          onClick={this.toggleNamesHandler}
+        >
           Toggle Names Handler HTML Button
         </button>
         {persons}

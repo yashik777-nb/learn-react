@@ -2,7 +2,7 @@
 import React from "react";
 // import Radium from "radium";
 import Styled from "styled-components";
-
+import PersonCSS from "./Person.module.css";
 const StyleDiv = Styled.div`
         width: 60%;
         margin: 16px auto;
@@ -23,12 +23,12 @@ export default function Person(props) {
   //   },
   // };
   return (
-    <StyleDiv>
+    <div className={PersonCSS.Person}>
       <p onClick={props.click}>
         I am {props.name}. I am {props.age} years Old. {props.children}
       </p>
       <input type="text" onChange={props.changed} value={props.name}></input>
-    </StyleDiv>
+    </div>
   );
 }
 
