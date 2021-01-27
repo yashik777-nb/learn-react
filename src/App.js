@@ -1,10 +1,25 @@
 // import logo from "./logo.svg";
 // import React, { useState } from "react";
 import React from "react";
-import "./App.css";
+import Classes from "./App.module.css";
 import Person from "./Person/Person";
-import Radium from "radium";
+// import Radium, { StyleRoot } from "radium";
+// import Styled from "styled-components";
 
+// const StyledButton = Styled.button`
+//       background-color: ${(props) => (props.alt ? "red" : "green")};
+//       color: white;
+//       font: inherit;
+//       border: 1px solid blue;
+//       padding: 8px;
+//       margin: 8px;
+//       cursor: pointer;
+
+//       &:hover {
+//         background-color: ${(props) => (props.alt ? "salmon" : "lightgreen")};
+//         color: black;
+//       }
+// `;
 class App extends React.Component {
   state = {
     persons: [
@@ -46,7 +61,7 @@ class App extends React.Component {
   deletePersonHandler = (index) => {
     // const persons = this.state.persons;
     // const persons = this.state.persons.slice();
-    // Always copy array and create and new array to avoid immuting. twp options splice and spread opearator
+    // Always copy array and create and new array to avoid immuting. two options splice and spread opearator
     const persons = [...this.state.persons];
     persons.splice(index, 1);
     this.setState({ persons: persons });
@@ -74,20 +89,20 @@ class App extends React.Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "green",
-      color: "white",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      margin: "8px",
-      cursor: "pointer",
+    // const style = {
+    //   backgroundColor: "green",
+    //   color: "white",
+    //   font: "inherit",
+    //   border: "1px solid blue",
+    //   padding: "8px",
+    //   margin: "8px",
+    //   cursor: "pointer",
 
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black",
-      },
-    };
+    //   // ":hover": {
+    //   //   backgroundColor: "lightgreen",
+    //   //   color: "black",
+    //   // },
+    // };
 
     let persons = null;
 
@@ -124,11 +139,11 @@ class App extends React.Component {
         </div>
       );
 
-      style.backgroundColor = "red";
-      style[":hover"] = {
-        backgroundColor: "lightred",
-        color: "black",
-      };
+      // style.backgroundColor = "red";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black",
+      // };
     }
 
     let paragraphClass = [];
@@ -136,6 +151,7 @@ class App extends React.Component {
     if (this.state.persons.length <= 1) paragraphClass.push("bold");
 
     return (
+      // <StyleRoot>
       <div className="App">
         <h1> I am a React App</h1>
         <p className={paragraphClass.join(" ")}>This is Working</p>
@@ -145,13 +161,21 @@ class App extends React.Component {
         >
           Switch Names handler Button
         </button> */}
-        <button onClick={this.toggleNamesHandler} style={style}>
-          Toggle Names Handler Button
+        {/* <StyledButton
+          onClick={this.toggleNamesHandler}
+          alt={this.state.showPersons}
+        >
+          Toggle Names Handler Styled Button
+        </StyledButton> */}
+        <button className={Classes.Button} onClick={this.toggleNamesHandler}>
+          Toggle Names Handler HTML Button
         </button>
         {persons}
       </div>
+      // </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+// export default Radium(App);
+export default App;
