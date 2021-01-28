@@ -1,24 +1,13 @@
 import React from "react";
 import Classes from "./App.module.css";
 import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 class App extends React.Component {
   state = {
     persons: [
-      {
-        id: 1,
-        name: "Yash",
-        age: 28,
-      },
-      {
-        id: 2,
-        name: "Sai",
-        age: 21,
-      },
-      {
-        id: 3,
-        name: "Sam",
-        age: 32,
-      },
+      { id: 1, name: "Yash", age: 28 },
+      { id: 2, name: "Sai", age: 21 },
+      { id: 3, name: "Sam", age: 32 },
     ],
     showPersons: false,
   };
@@ -55,36 +44,22 @@ class App extends React.Component {
 
   render() {
     let persons = null;
-    let btnClass = [];
-
     if (this.state.showPersons) {
-      btnClass.push(Classes.Red);
-
       persons = (
-        <div>
-          <Persons
-            persons={this.state.persons}
-            onClick={this.deletePersonHandler}
-            changed={this.nameChangedHandler}
-          />
-        </div>
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}
+        />
       );
     }
 
-    let paragraphClass = [];
-    if (this.state.persons.length <= 2) paragraphClass.push(Classes.red);
-    if (this.state.persons.length <= 1) paragraphClass.push(Classes.bold);
-
     return (
       <div className={Classes.App}>
-        <h1> I am a React App</h1>
-        <p className={paragraphClass.join(" ")}>This is Working</p>
-        <button
-          className={btnClass.join(" ")}
-          onClick={this.toggleNamesHandler}
-        >
-          Toggle Names Handler HTML Button
-        </button>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+        />
         {persons}
       </div>
     );
