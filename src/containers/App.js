@@ -59,6 +59,7 @@ class App extends React.Component {
         <Cockpit
           showPersons={this.state.showPersons}
           persons={this.state.persons}
+          nameHandler={this.toggleNamesHandler}
         />
         {persons}
       </div>
