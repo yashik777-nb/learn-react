@@ -3,14 +3,27 @@ import Classes from "./App.module.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 class App extends React.Component {
-  state = {
-    persons: [
-      { id: 1, name: "Yash", age: 28 },
-      { id: 2, name: "Sai", age: 21 },
-      { id: 3, name: "Sam", age: 32 },
-    ],
-    showPersons: false,
-  };
+  constructor(props) {
+    super(props);
+    console.log("[App.JS] Constructor");
+    this.state = {
+      persons: [
+        { id: 1, name: "Yash", age: 28 },
+        { id: 2, name: "Sai", age: 21 },
+        { id: 3, name: "Sam", age: 32 },
+      ],
+      showPersons: false,
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] Get Derieved State From Props", props, state);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log("[App.js] Mounted");
+  }
 
   deletePersonHandler = (index) => {
     // const persons = this.state.persons;
@@ -43,6 +56,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log("[App.js] Render");
     let persons = null;
     if (this.state.showPersons) {
       persons = (
@@ -57,6 +71,7 @@ class App extends React.Component {
     return (
       <div className={Classes.App}>
         <Cockpit
+          title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           nameHandler={this.toggleNamesHandler}

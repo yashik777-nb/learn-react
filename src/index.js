@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./containers/App";
 import reportWebVitals from "./reportWebVitals";
+import Mounting from "./components/ComponentLifeCycle/Mounting";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App appTitle="Person Manager" />
+    <Mounting />
   </React.StrictMode>,
   document.getElementById("root")
 );

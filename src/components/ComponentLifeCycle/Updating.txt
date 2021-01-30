@@ -1,0 +1,9 @@
+-- For Props --
+
+1. getDerivedStateFromProps(props, state) -> should return an object to udpate state or return null if no actions.
+2. ShouldComponentUpdate(nextProps, nextState) -> Decide whether to continue with updation process or not = should return true or false
+3. render() -> reads JSX and constructs the Virtual DOM
+4. Update Child Component Props
+5. getShapshotBeforeUpdate(prevProps, prevState) -> returns a snapshot object which can be reconfigured. 
+   Niche lifecycle. last minuite DOM checks. Eg: last User Position
+6. componentDidUpdate -> Can write HTTP requests
