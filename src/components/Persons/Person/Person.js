@@ -1,6 +1,8 @@
 import React from "react";
-// import PersonCSS from "./Person.module.css";
+import PropTypes from "prop-types";
+import PersonCSS from "./Person.module.css";
 import Auxillary from "../../../HigherOrderComponents/Auxillary.js";
+import withClass from "../../../HigherOrderComponents/withClass";
 class Person extends React.Component {
   render() {
     console.log("[Person.js] rendering");
@@ -21,9 +23,16 @@ class Person extends React.Component {
   }
 }
 
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func,
+};
+
 Person.defaultProps = {
   name: "Default",
   age: 0,
 };
 
-export default Person;
+export default withClass(Person, PersonCSS.Person);
