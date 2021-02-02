@@ -2,6 +2,8 @@ import React from "react";
 import Classes from "./App.module.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import withClass from "../HigherOrderComponents/withClass";
+import Auxillary from "../HigherOrderComponents/Auxillary";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +15,7 @@ class App extends React.Component {
         { id: 3, name: "Sam", age: 32 },
       ],
       showPersons: false,
+      showCockPit: true,
     };
   }
 
@@ -23,6 +26,15 @@ class App extends React.Component {
 
   componentDidMount() {
     console.log("[App.js] Mounted");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js]: Should Component Update");
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log("[App.js] Component Did Update");
   }
 
   deletePersonHandler = (index) => {
@@ -69,17 +81,26 @@ class App extends React.Component {
     }
 
     return (
-      <div className={Classes.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          nameHandler={this.toggleNamesHandler}
-        />
+      <Auxillary>
+        <button
+          onClick={() => {
+            this.setState({ showCockPit: false });
+          }}
+        >
+          Remove Cokpit
+        </button>
+        {this.state.showCockPit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            nameHandler={this.toggleNamesHandler}
+          />
+        ) : null}
         {persons}
-      </div>
+      </Auxillary>
     );
   }
 }
 
-export default App;
+export default withClass(App, Classes.App);

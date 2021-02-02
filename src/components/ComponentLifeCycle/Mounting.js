@@ -4,11 +4,13 @@ class Mounting extends React.Component {
   constructor(props) {
     super(props);
     console.log("Constructor");
+    this.state = "";
   }
 
-  static getDerievedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props, state) {
     console.log("Get Derieved State from Props");
     console.log("This is legacy");
+    return state;
   }
 
   render() {

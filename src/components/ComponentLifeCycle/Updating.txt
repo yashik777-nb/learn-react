@@ -1,9 +1,18 @@
 -- For Props --
 
 1. getDerivedStateFromProps(props, state) -> should return an object to udpate state or return null if no actions.
-2. ShouldComponentUpdate(nextProps, nextState) -> Decide whether to continue with updation process or not = should return true or false
-3. render() -> reads JSX and constructs the Virtual DOM
-4. Update Child Component Props
+   Do: Sync state to Props
+   Dont: Dont Cause any side-effects(HTTP Requests -> dont send any)
+2. ShouldComponentUpdate(nextProps, nextState) -> Decide whether to continue with updation process or not.
+   should return true or false.
+   Do: Decide whether to Continue or not.
+   Dont: Dont Cause any side-effects(HTTP Requests -> dont send any)
+3. render() -> reads JSX and constructs the Virtual DOm. Prepare and structure your JSX Code.
+4. Update Child Component Props of this component. Child components go into their own life cycle.
 5. getShapshotBeforeUpdate(prevProps, prevState) -> returns a snapshot object which can be reconfigured. 
-   Niche lifecycle. last minuite DOM checks. Eg: last User Position
+   Niche lifecycle. last minuite DOM checks. Eg: last User Position.
+   Do: Last minuite DOM opearations.
+   Dont: Dont Cause any side-effects(HTTP Requests -> dont send any)
 6. componentDidUpdate -> Can write HTTP requests
+   Do: Cause side Effects: Make HTTP requests. call setState but do not udpate the state directly.
+   Dont: Update state. (triggers re-render)
