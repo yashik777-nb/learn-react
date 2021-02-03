@@ -4,6 +4,7 @@ import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 import withClass from "../HigherOrderComponents/withClass";
 import Auxillary from "../HigherOrderComponents/Auxillary";
+import AuthContext from "../context/auth-context";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,7 @@ class App extends React.Component {
       showPersons: false,
       showCockPit: true,
       changeCounter: 0,
+      authenticated: false,
     };
   }
 
@@ -65,9 +67,15 @@ class App extends React.Component {
     });
   };
 
-  toggleNamesHandler = () => {
+  togglePersonsHandler = () => {
     this.setState({
       showPersons: !this.state.showPersons,
+    });
+  };
+
+  loginHandler = () => {
+    this.setState({
+      authenticated: true,
     });
   };
 
@@ -93,15 +101,22 @@ class App extends React.Component {
         >
           Remove Cokpit
         </button>
-        {this.state.showCockPit ? (
-          <Cockpit
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            personsLength={this.state.persons.length}
-            nameHandler={this.toggleNamesHandler}
-          />
-        ) : null}
-        {persons}
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler,
+          }}
+        >
+          {this.state.showCockPit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              personHandler={this.togglePersonsHandler}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
       </Auxillary>
     );
   }
